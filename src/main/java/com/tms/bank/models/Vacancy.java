@@ -21,37 +21,37 @@ public class Vacancy implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "vocation")
-    private String vocation;
+    private String vocationVacancy;
     @Column(name = "description")
     private String description;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "company_Id")
-    private Company company;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    public Vacancy(String vocation, String description) {
-        this.vocation = vocation;
+    public Vacancy(String vocationVacancy, String description) {
+        this.vocationVacancy = vocationVacancy;
         this.description = description;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Vacancy vacancy)) return false;
-        return id == vacancy.id && Objects.equals(vocation, vacancy.vocation) && Objects.equals(description, vacancy.description) && Objects.equals(company, vacancy.company);
+        if (!(o instanceof Vacancy)) return false;
+        Vacancy vacancy = (Vacancy) o;
+        return id == vacancy.id && Objects.equals(vocationVacancy, vacancy.vocationVacancy) && Objects.equals(description, vacancy.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, vocation, description, company);
+        return Objects.hash(id, vocationVacancy, description);
     }
 
     @Override
     public String toString() {
         return "Vacancy{" +
                 "id=" + id +
-                ", vocation='" + vocation + '\'' +
+                ", vocationVacancy='" + vocationVacancy + '\'' +
                 ", description='" + description + '\'' +
-                ", company=" + company +
                 '}';
     }
 }

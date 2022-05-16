@@ -1,9 +1,12 @@
 package com.tms.bank.models;
 
+import com.tms.bank.enums.Role;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -29,24 +32,24 @@ public class User implements Serializable {
     @Column(name = "vocation")
     private String vocation;
     @Column(name = "role")
-    private String role;
+    private Role role;
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "authCredential_Id")
     private Authcredential authcredential;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "company_Id")
-    private Company company;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Vacancy> vacancies;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User user)) return false;
-        return id == user.id && age == user.age && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(vocation, user.vocation) && Objects.equals(authcredential, user.authcredential) && Objects.equals(company, user.company);
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return id == user.id && age == user.age && firstName.equals(user.firstName) && lastName.equals(user.lastName) && Objects.equals(vocation, user.vocation) && role.equals(user.role) && authcredential.equals(user.authcredential);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, age, vocation, role);
+        return Objects.hash(id, firstName, lastName, age, vocation, role, authcredential);
     }
 
     @Override
@@ -58,8 +61,6 @@ public class User implements Serializable {
                 ", age=" + age +
                 ", vocation='" + vocation + '\'' +
                 ", role='" + role + '\'' +
-                ", authcredential=" + authcredential +
-                ", company=" + company +
                 '}';
     }
 }

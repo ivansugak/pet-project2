@@ -26,7 +26,7 @@ public class Authcredential implements Serializable {
     private String login;
     @Column(name = "password")
     private String password;
-    @OneToOne
+    @OneToOne(optional = false, mappedBy = "authcredential")
     @PrimaryKeyJoinColumn
     private User user;
 

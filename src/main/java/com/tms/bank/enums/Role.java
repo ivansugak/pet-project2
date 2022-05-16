@@ -9,7 +9,7 @@ public enum Role {
     ADMIN (Set.of(Permission.USER_READ, Permission.USER_WRITE)),
     USER (Set.of(Permission.USER_READ));
 
-    private Set<Permission> permissions;
+    private final Set<Permission> permissions;
 
     Role(Set<Permission> permissions) {
         this.permissions = permissions;
