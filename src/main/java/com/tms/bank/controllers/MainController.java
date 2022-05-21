@@ -30,4 +30,11 @@ public class MainController {
         model.addAttribute("title", "registration");
         return "registration";
     }
+
+    @GetMapping("/auth")
+    public String auth(Model model) {
+        model.addAttribute("title", "auth");
+        return "auth";
+    }
+
 }

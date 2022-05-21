@@ -12,7 +12,7 @@
     <h1>Edit vacancy</h1>
     <div th:each="el : ${vacancy}">
         <form method="post">
-            <input type="text" th:value="${el.vocation}" name="vocation" placeholder="Vocation" class="form-control"><br>
+            <input type="text" th:value="${el.vocationVacancy}" name="vocation" placeholder="Vocation" class="form-control"><br>
             <textarea name="description" placeholder="Description" class="form-control" th:text="${el.description}"/><br>
             <button type="submit" class="btn btn-success">Edit vacancy</button>
         </form>

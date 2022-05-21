@@ -38,6 +38,9 @@ public class VacanciesController {
                                    Model model) {
         VacancyDTO vacancy = new VacancyDTO(vocation, description);
         vacancyService.createVacancy(vacancy);
+//        Vacancy vacancy = new Vacancy(vocation, description);
+//        vacancyService.saveVacancy(vacancy);
+
         return "redirect:/vacancies";
     }
 

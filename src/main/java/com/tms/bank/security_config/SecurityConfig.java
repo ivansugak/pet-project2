@@ -27,20 +27,57 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final CustomUserDetailsService userDetailsService;
 
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http
+//                .csrf().disable()
+//                .authorizeRequests()
+//                .antMatchers("/", "/auth").permitAll()
+//                .antMatchers(HttpMethod.POST, "/vacancies/**").hasAuthority(Permission.USER_WRITE.getPermission())
+//                .antMatchers(HttpMethod.GET, "/vacancies/**").hasAuthority(Permission.USER_READ.getPermission())
+//                .antMatchers(HttpMethod.DELETE, "/vacancies/**").hasAuthority(Permission.USER_WRITE.getPermission())
+//                .anyRequest()
+//                .authenticated()
+//                .and()
+//                .httpBasic();
+//
+//    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
+                .antMatchers("/", "/registration", "/about", "/help").permitAll()
                 .antMatchers(HttpMethod.POST, "/vacancies/**").hasAuthority(Permission.USER_WRITE.getPermission())
                 .antMatchers(HttpMethod.GET, "/vacancies/**").hasAuthority(Permission.USER_READ.getPermission())
                 .antMatchers(HttpMethod.DELETE, "/vacancies/**").hasAuthority(Permission.USER_WRITE.getPermission())
                 .anyRequest()
                 .authenticated()
                 .and()
-                .httpBasic();
+                .formLogin()
+                .loginPage("/auth")
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();
+
     }
+
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http
+//                .csrf().disable()
+//                .authorizeRequests()
+//                .antMatchers("/").permitAll()
+//                .antMatchers(HttpMethod.POST, "/vacancies/**").hasAuthority(Permission.USER_WRITE.getPermission())
+//                .antMatchers(HttpMethod.GET, "/vacancies/**").hasAuthority(Permission.USER_READ.getPermission())
+//                .antMatchers(HttpMethod.DELETE, "/vacancies/**").hasAuthority(Permission.USER_WRITE.getPermission())
+//                .anyRequest()
+//                .authenticated()
+//                .and()
+//                .httpBasic();
+//    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

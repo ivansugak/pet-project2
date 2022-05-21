@@ -11,9 +11,8 @@
 <div class="container mt-5">
     <h1>Remove vacancy</h1>
     <div th:each="el : ${vacancy}" class="alert alert-info mt-2">
-        <h3 th:text="${el.vocation}"/>
+        <h3 th:text="${el.vocationVacancy}"/>
         <h3 th:text="${el.description}"/>
-        <h3 th:text="${el.company}"/>
         <a th:href="'/vacancies/' + ${el.id} + '/edit'" class="btn btn-warning">Edit</a><br><br>
         <form th:action="'/vacancies/' + ${el.id} + '/remove'" method="post">
             <button class="btn btn-warning" type="submit">Delete</button>

@@ -10,10 +10,13 @@ import com.tms.bank.repositories.AuthcredentialRepository;
 import com.tms.bank.repositories.UserRepository;
 import com.tms.bank.repositories.VacancyRepository;
 import lombok.RequiredArgsConstructor;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 

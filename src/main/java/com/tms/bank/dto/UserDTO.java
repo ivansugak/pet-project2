@@ -1,6 +1,6 @@
 package com.tms.bank.dto;
 
-import com.tms.bank.enums.Role;
+//import com.tms.bank.enums.Role;
 import lombok.*;
 
 @Getter
@@ -16,6 +16,7 @@ public class UserDTO {
     private String lastName;
     private int age;
     private String vocation;
-//    private Role role = Role.USER;
-    private Role role;
+    //    private Role role = Role.USER;
+//    private Role role;
+    private String role;
 }

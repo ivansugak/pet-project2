@@ -1,6 +1,7 @@
 package com.tms.bank.mapper;
 
 import com.tms.bank.dto.UserDTO;
+import com.tms.bank.enums.Role;
 import com.tms.bank.models.User;
 
 
@@ -12,7 +13,7 @@ public class UserMapper {
                 .lastName(user.getLastName())
                 .age(user.getAge())
                 .vocation(user.getVocation())
-                .role(user.getRole())
+                .role(String.valueOf(user.getRole()))
                 .build();
     }
 
@@ -22,7 +23,7 @@ public class UserMapper {
                 .lastName(userDTO.getLastName())
                 .age(userDTO.getAge())
                 .vocation(userDTO.getVocation())
-                .role(userDTO.getRole())
+                .role(Role.valueOf(userDTO.getRole()))
                 .build();
     }
 }

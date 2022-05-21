@@ -19,6 +19,11 @@ public class CustomUser implements UserDetails {
     private List<GrantedAuthority> grantedAuthorities;
     private boolean isActive;
 
+    public CustomUser(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return grantedAuthorities;
