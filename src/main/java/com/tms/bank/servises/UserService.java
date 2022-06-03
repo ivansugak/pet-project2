@@ -34,11 +34,20 @@ public class UserService {
         return null;
     }
 
-    public UserDTO createUser (UserDTO userDTO){ //to do companyRep + userDTO (companyDTO+authDTO)
-        UserDTO newUserDTO = UserMapper.mapToDTO(userRepository.save(UserMapper.mapToEntity(userDTO)));
-        AuthcredentialMapper.mapToDTO(authcredentialRepository.save(AuthcredentialMapper.mapToEntity(userDTO)));
+    public UserDTO createUser (UserDTO userDTO){
+//        Authcredential newAuthcredential = authcredentialRepository.save(AuthcredentialMapper.mapToEntity(userDTO));
+//        UserDTO newUserDTO = UserMapper.mapToDTO(userRepository.save(UserMapper.mapToEntity(userDTO)));
 
-        return newUserDTO;
+        userRepository.save(User.builder()
+                .firstName(userDTO.getFirstName())
+                .lastName(userDTO.getLastName())
+                .age(userDTO.getAge())
+                .role(userDTO.getRole())
+                .vocation(userDTO.getVocation())
+                .authcredential(new Authcredential(userDTO.getLogin(), userDTO.getPassword()))
+                .build());
+
+        return userDTO;
     }
 
     public UserDTO updateUser (Long id, UserDTO userDTO){

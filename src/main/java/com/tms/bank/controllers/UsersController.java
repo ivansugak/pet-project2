@@ -1,19 +1,22 @@
 package com.tms.bank.controllers;
 
+import com.tms.bank.dto.UserDTO;
 import com.tms.bank.mapper.UserMapper;
 import com.tms.bank.models.User;
 import com.tms.bank.servises.UserService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Optional;
 
 @Controller
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UsersController {
 
     private final UserService userService;
@@ -32,6 +35,16 @@ public class UsersController {
     public String deleteUser(@PathVariable(value = "id") long id,
                              Model model){
         userService.delete(id);
+        return "redirect:/";
+    }
+
+    public String newUser(Model model){
+        model.addAttribute("userDTO", new UserDTO());
+        return "/registration";
+    }
+
+    public String create (@ModelAttribute("userDTO") UserDTO userDTO){
+        userService.createUser(userDTO);
         return "redirect:/";
     }
 

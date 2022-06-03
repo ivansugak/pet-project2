@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:text="${title}"/>
@@ -8,7 +9,12 @@
 <body>
 <header th:insert="blocks/header::header"></header>
 
-<div th:insert="blocks/footer::footer"></div>
+<div> <img src="../static/images/vacancy.png" width="600" height="337" alt="WELCOME"/></div>
+<!--th:src="@{-->
 
+<!--<div> &lt;!&ndash;/*@thymesVar id="vacancy" type="images"*/&ndash;&gt;-->
+<!--    <img th:src="@{${vacancy}}" width="600" height="337" alt="WELCOME"/></div>-->
+
+<div th:insert="blocks/footer::footer"></div>
 </body>
 </html>

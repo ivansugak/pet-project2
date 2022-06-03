@@ -30,6 +30,11 @@ public class Authcredential implements Serializable {
     @PrimaryKeyJoinColumn
     private User user;
 
+    public Authcredential(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
