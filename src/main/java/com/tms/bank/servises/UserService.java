@@ -1,22 +1,20 @@
 package com.tms.bank.servises;
 
 import com.tms.bank.dto.UserDTO;
-import com.tms.bank.mapper.AuthcredentialMapper;
+//import com.tms.bank.mapper.AuthcredentialMapper;
+import com.tms.bank.enums.Role;
 import com.tms.bank.mapper.UserMapper;
-import com.tms.bank.models.Authcredential;
+//import com.tms.bank.models.Authcredential;
 import com.tms.bank.models.User;
-import com.tms.bank.models.Vacancy;
-import com.tms.bank.repositories.AuthcredentialRepository;
+//import com.tms.bank.repositories.AuthcredentialRepository;
 import com.tms.bank.repositories.UserRepository;
-import com.tms.bank.repositories.VacancyRepository;
 import lombok.RequiredArgsConstructor;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,68 +23,77 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final AuthcredentialRepository authcredentialRepository;
+//    private final AuthcredentialRepository authcredentialRepository;
 
-    public UserDTO getUserById(Long id){
-        if(userRepository.findById(id).isPresent()){
+    public UserDTO getUserById(Long id) {
+        if (userRepository.findById(id).isPresent()) {
             return UserMapper.mapToDTO(userRepository.findById(id).get());
         }
         return null;
     }
 
-    public UserDTO createUser (UserDTO userDTO){
-//        Authcredential newAuthcredential = authcredentialRepository.save(AuthcredentialMapper.mapToEntity(userDTO));
-//        UserDTO newUserDTO = UserMapper.mapToDTO(userRepository.save(UserMapper.mapToEntity(userDTO)));
+    public UserDTO createUser(UserDTO userDTO) {
+
+//        if(!userDTO.getLogin().equals(userRepository.findUserByLogin(userDTO.getLogin()))){
 
         userRepository.save(User.builder()
                 .firstName(userDTO.getFirstName())
                 .lastName(userDTO.getLastName())
                 .age(userDTO.getAge())
-                .role(userDTO.getRole())
+                .role(Role.USER)
                 .vocation(userDTO.getVocation())
-                .authcredential(new Authcredential(userDTO.getLogin(), userDTO.getPassword()))
+                .login(userDTO.getLogin())
+                .password(userDTO.getPassword())
                 .build());
+//        }
+//        else {
+//            throw new UserException ("User is exsist!");
+//        }
 
         return userDTO;
     }
 
-    public UserDTO updateUser (Long id, UserDTO userDTO){
+    public UserDTO updateUser(Long id, UserDTO userDTO) {
         Optional<User> user = userRepository.findById(id);
         UserDTO newUserDTO;
 
-        if (user.isPresent()){
+        if (user.isPresent()) {
             User userEntity = user.get();
-            Authcredential authcredentialEntity = authcredentialRepository.getById(id);
 
             userEntity.setFirstName(userDTO.getFirstName());
             userEntity.setLastName(userDTO.getLastName());
             userEntity.setAge(userDTO.getAge());
             userEntity.setVocation(userDTO.getVocation());
-            authcredentialEntity.setLogin(userDTO.getLogin());
-            authcredentialEntity.setPassword(userDTO.getPassword());
+            userEntity.setLogin(userDTO.getLogin());
+            userEntity.setPassword(userDTO.getPassword());
 
             newUserDTO = UserMapper.mapToDTO(userRepository.save(userEntity));
-            AuthcredentialMapper.mapToDTO(authcredentialRepository.save(AuthcredentialMapper.mapToEntity(userDTO)));
             return newUserDTO;
         } else {
             throw new EntityNotFoundException("User was not found in database");
         }
     }
 
-    public String delete(Long id){
-        if(userRepository.findById(id).isPresent()){
+    public String delete(Long id) {
+        if (userRepository.findById(id).isPresent()) {
             userRepository.delete(userRepository.findById(id).get());
         }
         return "User " + id + " delete";
     }
 
-//    public List<Vacancy> findByAllVacancy(){
-//        return vacancyRepository.findAll();
-//    }
-
-    public boolean existsById(Long id){
+    public boolean existsById(Long id) {
         return userRepository.existsById(id);
     }
 
+    public boolean getUserByLogin(String login) {
+        if (userRepository.findUserByLogin(login).isPresent()) {
+            return false;
+        }
+        return true;
+    }
 
+    public List<User> getUsers() {
+        List<User> users = userRepository.findAll();
+        return users;
+    }
 }

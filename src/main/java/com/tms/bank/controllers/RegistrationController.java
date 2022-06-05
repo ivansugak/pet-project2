@@ -1,6 +1,7 @@
 package com.tms.bank.controllers;
 
 import com.tms.bank.dto.UserDTO;
+import com.tms.bank.exception.UserException;
 import com.tms.bank.servises.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ public class RegistrationController {
                          @RequestParam("lastname") String lastname,
                          @RequestParam("age") int age,
                          @RequestParam("vocation") String vocation,
-                         Model model){
+                         Model model) {
 //    @PostMapping()
 //    public String create(@ModelAttribute("userDTO") UserDTO userDTO){
         UserDTO userDTO = new UserDTO();
@@ -35,11 +36,22 @@ public class RegistrationController {
         userDTO.setAge(age);
         userDTO.setVocation(vocation);
 
-        userService.createUser(userDTO);
+        if (userService.getUserByLogin(username)) {
+            userService.createUser(userDTO);
+            return "redirect:/";
+        }
+//        else {
+//            showUser();
+//        }
 
 //        model.addAttribute("user", userDTO);
 
-        return "redirect:/home";
+        return showUser();
     }
+
+    public String showUser() {
+        return "redirect:/errorCreateUser";
+    }
+
 
 }

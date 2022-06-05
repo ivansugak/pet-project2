@@ -13,7 +13,9 @@ public class UserMapper {
                 .lastName(user.getLastName())
                 .age(user.getAge())
                 .vocation(user.getVocation())
-                .role((user.getRole()))
+                .role(user.getRole())
+                .login(user.getLogin())
+                .password(user.getPassword())
                 .build();
     }
 
@@ -23,7 +25,9 @@ public class UserMapper {
                 .lastName(userDTO.getLastName())
                 .age(userDTO.getAge())
                 .vocation(userDTO.getVocation())
-                .role(Role.USER)
+                .role(userDTO.getRole())
+                .login(userDTO.getLogin())
+                .password(userDTO.getPassword())
                 .build();
     }
 }

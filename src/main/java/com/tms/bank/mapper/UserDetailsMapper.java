@@ -9,8 +9,8 @@ public class UserDetailsMapper {
     public static UserDetails mapToCustomUser(User user){
 
         return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getAuthcredential().getLogin())
-                .password(user.getAuthcredential().getPassword())
+                .username(user.getLogin())
+                .password(user.getPassword())
                 .build();
     }
 }

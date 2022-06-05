@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Log in with your account</title>
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/style.css">
+</head>
+
+<body>
+<div>
+    <table>
+        <thead>
+        <th>ID</th>
+        <th>Login</th>
+        <th>Password</th>
+        <th>Role</th>
+        </thead>
+        <forEach items="${users}" var="user">
+            <tr>
+                <td>${user.id}</td>
+                <td>${user.login}</td>
+                <td>${user.password}</td>
+                <td>
+                    <forEach items="${user.role}" var="role">${role.name}; </forEach>
+                </td>
+                <td>
+                    <form action="${pageContext.request.contextPath}/admin" method="post">
+                        <input type="hidden" name="userId" value="${user.id}"/>
+                        <input type="hidden" name="action" value="delete"/>
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </forEach>
+    </table>
+    <a href="/">Home</a>
+</div>
+</body>
+</html>

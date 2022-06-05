@@ -6,7 +6,6 @@ import com.tms.bank.models.User;
 import com.tms.bank.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -16,15 +15,12 @@ import org.springframework.stereotype.Service;
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
-//    private final AuthcredentialRepository authcredentialRepository;
 
     @SneakyThrows
     @Override
     public UserDetails loadUserByUsername(String username) {
-//        Authcredential authcredential = authcredentialRepository.findByLogin(username)
-//                .orElseThrow(()->new UserException("User was not found!"));
 
-        User user = userRepository.findUserByAuthcredentialLogin(username)
+        User user = userRepository.findUserByLogin(username)
                 .orElseThrow(()->new UserException("User was not found!"));
 
         return UserDetailsMapper.mapToCustomUser(user);

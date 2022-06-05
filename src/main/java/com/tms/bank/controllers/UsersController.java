@@ -1,6 +1,7 @@
 package com.tms.bank.controllers;
 
 import com.tms.bank.dto.UserDTO;
+import com.tms.bank.exception.UserException;
 import com.tms.bank.mapper.UserMapper;
 import com.tms.bank.models.User;
 import com.tms.bank.servises.UserService;
@@ -43,7 +44,7 @@ public class UsersController {
         return "/registration";
     }
 
-    public String create (@ModelAttribute("userDTO") UserDTO userDTO){
+    public String create (@ModelAttribute("userDTO") UserDTO userDTO) throws UserException {
         userService.createUser(userDTO);
         return "redirect:/";
     }

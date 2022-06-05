@@ -1,23 +1,19 @@
-package com.tms.bank.dto;
+package com.tms.bank.payload;
 
-//import com.tms.bank.enums.Role;
 import com.tms.bank.enums.Role;
 import lombok.*;
 
-@Getter
-@Setter
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class UserDTO {
-
+@ToString
+public class RegistrRequest {
     private String firstName;
     private String lastName;
     private int age;
-    private Role role;
     private String vocation;
+    private Role role = Role.USER;
     private String login;
     private String password;
-//    private Role role;
-//    private String role;
 }
