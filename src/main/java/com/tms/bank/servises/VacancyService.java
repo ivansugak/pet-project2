@@ -23,7 +23,7 @@ public class VacancyService {
     }
 
     public VacancyDTO createVacancy (VacancyDTO vacancyDTO){
-        VacancyDTO newVacancyDTO = VacancyMapper.mapVacancyToVacancyDTO(vacancyRepository.save(VacancyMapper.mapVacancyDTOToVacancy(vacancyDTO)));
+        VacancyDTO newVacancyDTO = VacancyMapper.mapToDTO(vacancyRepository.save(VacancyMapper.mapToEntity(vacancyDTO)));
 
         return newVacancyDTO;
     }
@@ -34,7 +34,7 @@ public class VacancyService {
 
     public VacancyDTO findVacancyById(Long id){
         if(vacancyRepository.findById(id).isPresent()){
-            return VacancyMapper.mapVacancyToVacancyDTO(vacancyRepository.findById(id).get());
+            return VacancyMapper.mapToDTO(vacancyRepository.findById(id).get());
         }
         return null;
     }

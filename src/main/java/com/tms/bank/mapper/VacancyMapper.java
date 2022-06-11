@@ -5,14 +5,14 @@ import com.tms.bank.models.Vacancy;
 
 public class VacancyMapper {
 
-    public static VacancyDTO mapVacancyToVacancyDTO(Vacancy vacancy){
+    public static VacancyDTO mapToDTO(Vacancy vacancy){
         return VacancyDTO.builder()
                 .vocation(vacancy.getVocationVacancy())
                 .description(vacancy.getDescription())
                 .build();
     }
 
-    public static Vacancy mapVacancyDTOToVacancy(VacancyDTO vacancyDTO){
+    public static Vacancy mapToEntity(VacancyDTO vacancyDTO){
         return Vacancy.builder()
                 .vocationVacancy(vacancyDTO.getVocation())
                 .description(vacancyDTO.getDescription())

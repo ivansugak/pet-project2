@@ -22,8 +22,7 @@ public class AdminController {
     }
 
     public String deleteUser(@RequestParam(required = true, defaultValue = "" ) Long userId,
-                             @RequestParam(required = true, defaultValue = "" ) String action,
-                             Model model){
+                             @RequestParam(required = true, defaultValue = "" ) String action){
         if(action.equals("delete")){
             userService.delete(userId);
         }

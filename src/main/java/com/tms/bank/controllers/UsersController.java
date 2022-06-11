@@ -5,7 +5,6 @@ import com.tms.bank.exception.UserException;
 import com.tms.bank.mapper.UserMapper;
 import com.tms.bank.models.User;
 import com.tms.bank.servises.UserService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
