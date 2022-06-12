@@ -3,6 +3,7 @@ package com.tms.bank.controllers;
 import com.tms.bank.dto.UserDTO;
 import com.tms.bank.servises.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

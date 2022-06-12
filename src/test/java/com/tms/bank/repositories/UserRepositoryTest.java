@@ -16,18 +16,18 @@ class UserRepositoryTest {
         expectedUser = new User();
         expectedUser.setFirstName("Anna");
         expectedUser.setLastName("Annov");
-        expectedUser.setAge(25);
+        expectedUser.setAge(39);
         expectedUser.setVocation("YANDEX-JUNIOR");
         expectedUser.setRole(Role.USER);
         expectedUser.setLogin("Anna");
-        expectedUser.setPassword("$2a$12$ktSGWbkwm8pn4lQduwXYTOqp3I0Q3SUFDuj1El1Iw2WRSBhfofASG");
+        expectedUser.setPassword("$2a$10$IXLdV7q4nA7XRWPVCJxr3uqufChn7VnAN/UiNJjIa5Z1H1FkFY.oG");
     }
 
     @Test
     @DisplayName("Testing search user which exists in database")
     @Tag("Repository-TEST")
     void findUserByLogin() {
-        Optional<User> actualUser = userRepository.findUserByLogin("Anna");
+        Optional<User> actualUser = userRepository.findByLogin("Anna");
         Assertions.assertEquals(expectedUser,actualUser);
     }
 }

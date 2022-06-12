@@ -1,7 +1,6 @@
 package com.tms.bank.mapper;
 
 import com.tms.bank.dto.UserDTO;
-import com.tms.bank.enums.Role;
 import com.tms.bank.models.User;
 
 

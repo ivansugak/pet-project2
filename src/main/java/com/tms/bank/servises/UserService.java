@@ -9,18 +9,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     public UserDTO getUserById(Long id) {
         if (userRepository.findById(id).isPresent()) {
@@ -50,7 +49,6 @@ public class UserService {
 
         if (user.isPresent()) {
             User userEntity = user.get();
-
             userEntity.setFirstName(userDTO.getFirstName());
             userEntity.setLastName(userDTO.getLastName());
             userEntity.setAge(userDTO.getAge());
@@ -77,7 +75,7 @@ public class UserService {
     }
 
     public boolean getUserByLogin(String login) {
-        if (userRepository.findUserByLogin(login).isPresent()) {
+        if (userRepository.findByLogin(login).isPresent()) {
             return false;
         }
         return true;

@@ -20,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) {
 
-        User user = userRepository.findUserByLogin(username)
+        User user = userRepository.findByLogin(username)
                 .orElseThrow(()->new UserException("User was not found!"));
 
         return UserDetailsMapper.mapToCustomUser(user);

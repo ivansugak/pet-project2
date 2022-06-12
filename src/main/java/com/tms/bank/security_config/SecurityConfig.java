@@ -2,6 +2,7 @@ package com.tms.bank.security_config;
 
 import com.tms.bank.enums.Permission;
 import com.tms.bank.servises.CustomUserDetailsService;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
