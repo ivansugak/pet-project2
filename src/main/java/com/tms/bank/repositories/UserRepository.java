@@ -6,9 +6,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
+//@Repository
+//@EnableJpaRepositories("com.tms.bank.repositories")
+//public interface UserRepository extends JpaRepository<User, Long> {
+//    Optional<User> findByLogin(String login);
+//}
+
 @Repository
-@EnableJpaRepositories("com.tms.bank.repositories")
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByLogin(String login);
+    Optional<User> getByLogin(String login);
 }
 

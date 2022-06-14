@@ -5,7 +5,6 @@ import com.tms.bank.mapper.UserDetailsMapper;
 import com.tms.bank.models.User;
 import com.tms.bank.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -16,12 +15,18 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    @SneakyThrows
     @Override
     public UserDetails loadUserByUsername(String username) {
 
-        User user = userRepository.findByLogin(username)
-                .orElseThrow(()->new UserException("User was not found!"));
+        User user = null;
+        try {
+            user = userRepository.getByLogin(username)
+                    .orElseThrow(()->new UserException("User was not found!"));
+        } catch (UserException e) {
+            e.printStackTrace();
+        }
+
+//        List<SimpleGrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(Role.USER.getPermissions().toString()));
 
         return UserDetailsMapper.mapToCustomUser(user);
 

@@ -37,4 +37,9 @@ public class MainController {
         return "auth";
     }
 
+    @GetMapping("/accessDenied")
+    public String accessDenied() {
+        return "accessDenied";
+    }
+
 }

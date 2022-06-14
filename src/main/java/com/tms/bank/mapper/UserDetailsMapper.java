@@ -11,6 +11,7 @@ public class UserDetailsMapper {
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getLogin())
                 .password(user.getPassword())
+                .authorities(user.getRole().getAuthorities())
                 .build();
     }
 }

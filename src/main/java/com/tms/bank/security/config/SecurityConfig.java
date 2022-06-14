@@ -1,8 +1,8 @@
-package com.tms.bank.security_config;
+package com.tms.bank.security.config;
 
 import com.tms.bank.enums.Permission;
+import com.tms.bank.exception.CustomAccessDeniedHandler;
 import com.tms.bank.servises.CustomUserDetailsService;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 import java.security.SecureRandom;
 
@@ -31,13 +32,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/registration", "/about", "/help").permitAll()
+                .antMatchers("/", "/registration", "/about", "/help", "/images/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/vacancies/**", "/admin").hasAuthority(Permission.USER_WRITE.getPermission())
-                .antMatchers(HttpMethod.GET, "/vacancies/**").hasAuthority(Permission.USER_READ.getPermission())
+                .antMatchers(HttpMethod.GET, "/vacancies/**").hasAuthority(Permission.USER_WRITE.getPermission())
                 .antMatchers(HttpMethod.DELETE, "/vacancies/**", "/admin").hasAuthority(Permission.USER_WRITE.getPermission())
                 .antMatchers(HttpMethod.GET, "/admin").hasAuthority(Permission.USER_WRITE.getPermission())
                 .anyRequest()
                 .authenticated()
+                .and()
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
                 .and()
                 .formLogin()
                 .loginPage("/auth")
@@ -65,5 +68,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     protected PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder(12, new SecureRandom());
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler(){
+        return new CustomAccessDeniedHandler();
     }
 }

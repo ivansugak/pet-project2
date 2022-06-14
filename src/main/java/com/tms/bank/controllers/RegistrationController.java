@@ -3,7 +3,6 @@ package com.tms.bank.controllers;
 import com.tms.bank.dto.UserDTO;
 import com.tms.bank.servises.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,15 +41,15 @@ public class RegistrationController {
 
         if (userService.getUserByLogin(username)) {
             userService.createUser(userDTO);
-            return "redirect:/";
+            return "/vacancies";
         }
-
-        return showUser();
+        else {
+            return "/errorcreateuser";
+        }
+//        return errorRegistrationUser();
     }
-
-    public String showUser() {
-        return "errorCreateUser";
-    }
-
-
+//    @GetMapping("/error")
+//    public String errorRegistrationUser() {
+//        return "errorCreateUser";
+//    }
 }

@@ -75,7 +75,7 @@ public class UserService {
     }
 
     public boolean getUserByLogin(String login) {
-        if (userRepository.findByLogin(login).isPresent()) {
+        if (userRepository.getByLogin(login).isPresent()) {
             return false;
         }
         return true;
