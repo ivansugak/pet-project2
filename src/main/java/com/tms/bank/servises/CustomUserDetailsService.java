@@ -26,8 +26,6 @@ public class CustomUserDetailsService implements UserDetailsService {
             e.printStackTrace();
         }
 
-//        List<SimpleGrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(Role.USER.getPermissions().toString()));
-
         return UserDetailsMapper.mapToCustomUser(user);
 
     }

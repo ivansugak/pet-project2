@@ -23,13 +23,6 @@ public class RegistrationController {
                          @RequestParam("age") int age,
                          @RequestParam("vocation") String vocation) {
 
-//        UserDTO userDTO = new UserDTO();
-//        userDTO.setLogin(username);
-//        userDTO.setPassword(password);
-//        userDTO.setFirstName(firstname);
-//        userDTO.setLastName(lastname);
-//        userDTO.setAge(age);
-//        userDTO.setVocation(vocation);
         UserDTO userDTO = UserDTO.builder()
                 .login(username)
                 .password(password)
@@ -46,10 +39,5 @@ public class RegistrationController {
         else {
             return "/errorcreateuser";
         }
-//        return errorRegistrationUser();
     }
-//    @GetMapping("/error")
-//    public String errorRegistrationUser() {
-//        return "errorCreateUser";
-//    }
 }

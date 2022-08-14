@@ -18,7 +18,6 @@ import java.util.ArrayList;
 public class VacanciesController {
 
     private final VacancyService vacancyService;
-//    private final VacancyRepository vacancyRepository;
 
     @GetMapping("/vacancies")
     public String showVacancies(Model model) {
@@ -28,18 +27,16 @@ public class VacanciesController {
     }
 
     @GetMapping("/vacancies/add")
-    public String addVacancies(Model model) {
+    public String addVacancies() {
         return "vacancies-add";
     }
 
     @PostMapping("/vacancies/add")
     public String addPostVacancies(@RequestParam String vocation,
-                                   @RequestParam String description,
-                                   Model model) {
+                                   @RequestParam String description
+                                   ) {
         VacancyDTO vacancy = new VacancyDTO(vocation, description);
         vacancyService.createVacancy(vacancy);
-//        Vacancy vacancy = new Vacancy(vocation, description);
-//        vacancyService.saveVacancy(vacancy);
 
         return "redirect:/vacancies";
     }
@@ -50,9 +47,6 @@ public class VacanciesController {
         if (!vacancyService.existsVacancyById(id)) {
             return "redirect:/vacancies";
         }
-//        Optional<Vacancy> vacancy = vacancyRepository.findById(id);
-//        ArrayList<Vacancy> vacancies = new ArrayList<>();
-//        vacancy.ifPresent(vacancies::add);
         ArrayList<Vacancy> vacancies = vacancyService.addListVacanvyForshowVacanciesDetail(id);
         model.addAttribute("vacancy", vacancies);
         return "vacancies-detail";
@@ -64,9 +58,7 @@ public class VacanciesController {
         if (!vacancyService.existsVacancyById(id)) {
             return "redirect:/vacancies";
         }
-//        Optional<Vacancy> vacancy = vacancyRepository.findById(id);
-//        ArrayList<Vacancy> vacancies = new ArrayList<>();
-//        vacancy.ifPresent(vacancies::add);
+
         ArrayList<Vacancy> vacancies = vacancyService.addListVacanvyForshowVacanciesDetail(id);
         model.addAttribute("vacancy", vacancies);
         return "vacancies-detail-edit";
@@ -75,23 +67,18 @@ public class VacanciesController {
     @PostMapping("/vacancies/{id}/edit")
     public String editPostVacancies(@PathVariable(value = "id") long id,
                                     @RequestParam String vocation,
-                                    @RequestParam String description,
-                                    Model model) {
-//        Vacancy vacancy = vacancyRepository.findById(id).orElseThrow();
+                                    @RequestParam String description) {
+
         Vacancy vacancy = vacancyService.editVacancies(id);
         vacancy.setVocationVacancy(vocation);
         vacancy.setDescription(description);
         vacancyService.saveVacancy(vacancy);
-//        vacancyRepository.save(vacancy);
-//        vacancyService.createVacancy(VacancyMapper.mapVacancyToVacancyDTO(vacancy));
+
         return "redirect:/vacancies";
     }
 
     @PostMapping("/vacancies/{id}/remove")
-    public String deletePostVacancies(@PathVariable(value = "id") long id,
-                                      Model model) {
-//        Vacancy vacancy = vacancyRepository.findById(id).orElseThrow();
-//        vacancyRepository.delete(vacancy);
+    public String deletePostVacancies(@PathVariable(value = "id") long id) {
         vacancyService.deleteVacancies(id);
         return "redirect:/vacancies";
     }

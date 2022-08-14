@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/registration", "/about", "/help", "/images/**").permitAll()
+                .antMatchers("/", "/registration", "/about", "/help", "/images/**", "/vacancies").permitAll()
                 .antMatchers(HttpMethod.POST, "/vacancies/**", "/admin").hasAuthority(Permission.USER_WRITE.getPermission())
                 .antMatchers(HttpMethod.GET, "/vacancies/**").hasAuthority(Permission.USER_WRITE.getPermission())
                 .antMatchers(HttpMethod.DELETE, "/vacancies/**", "/admin").hasAuthority(Permission.USER_WRITE.getPermission())
@@ -47,6 +47,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
+                .logoutUrl("/logout")
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
                 .permitAll();
 
     }

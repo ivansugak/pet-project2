@@ -1,29 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${footer}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <style>
+        .col-md-4 d-flex align-items-center {
+            padding: 15px;
+            text-align: center;
+            /*flex-wrap: wrap;*/
+            /*justify-content: space-between;*/
+            /*align-items: center;*/
+            /*border-top: aliceblue;*/
+        }
+    </style>
+</head>
+<body>
 <div th:fragment="footer">
-<!--    <footer class="text-muted py-5">-->
-<!--        <div class="col-md-4 d-flex align-items-center">-->
-<!--            <span class="text-muted">© 2021 Company, Inc</span>-->
-<!--        </div>-->
-<!--        <div class="container">-->
-<!--            <p class="float-end mb-1">-->
-<!--                <a href="#">Back to top</a>-->
-<!--            </p>-->
-<!--        </div>-->
-<!--    </footer>-->
 
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <footer>
         <div class="col-md-4 d-flex align-items-center">
-            <span class="text-muted">© 2021 </span>
+            <div class="text-muted">© 2021 </div>
             <div class="container">
                 <p class="float-end mb-1">
                     <a href="/">Home</a>
                 </p>
             </div>
         </div>
-
-<!--        <div class="container">-->
-<!--            <p class="float-end mb-1">-->
-<!--                <a href="#">Back to top</a>-->
-<!--            </p>-->
-<!--        </div>-->
     </footer>
 </div>
+</body>
+</html>

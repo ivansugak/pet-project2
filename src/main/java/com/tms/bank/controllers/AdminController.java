@@ -1,13 +1,15 @@
 package com.tms.bank.controllers;
 
+import com.tms.bank.models.User;
+import com.tms.bank.models.Vacancy;
 import com.tms.bank.servises.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 @RequiredArgsConstructor
@@ -17,15 +19,14 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String usersList(Model model){
-        model.addAttribute("allUsers", userService.getUsers());
+        Iterable<User> users = userService.getUsers();
+        model.addAttribute("users", users);
         return "admin";
     }
 
-    public String deleteUser(@RequestParam(required = true, defaultValue = "" ) Long userId,
-                             @RequestParam(required = true, defaultValue = "" ) String action){
-        if(action.equals("delete")){
-            userService.delete(userId);
-        }
+    @PostMapping("/admin/{id}/remove")
+    public String deleteUser(@PathVariable(value = "id") long id) {
+        userService.delete(id);
         return "redirect:/admin";
     }
 

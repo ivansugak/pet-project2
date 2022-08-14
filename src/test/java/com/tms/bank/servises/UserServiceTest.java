@@ -97,7 +97,7 @@
 //    @DisplayName("Testing search user by login in database")
 //    @ValueSource(strings = "Anna")
 //    void getUserByLogin(String login) {
-//        Optional<User> actualUser = userRepository.findByLogin(login);
+//        Optional<User> actualUser = userRepository.getByLogin(login);
 //        Assertions.assertEquals(expectedUser, actualUser);
 //    }
 //

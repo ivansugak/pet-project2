@@ -32,20 +32,20 @@ public class UsersController {
     }
 
     @PostMapping("/user/{id}/remove")
-    public String deleteUser(@PathVariable(value = "id") long id,
-                             Model model){
+    public String deleteUser(@PathVariable(value = "id") long id){
         userService.delete(id);
         return "redirect:/";
     }
 
-    public String newUser(Model model){
-        model.addAttribute("userDTO", new UserDTO());
-        return "/registration";
-    }
+//    @GetMapping("/logout")
+//    public String logout(HttpServletRequest request) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        if (authentication != null) {
+//            request.getSession().invalidate();
+//        }
+//        return "redirect:/";
+//    }
 
-    public String create (@ModelAttribute("userDTO") UserDTO userDTO) throws UserException {
-        userService.createUser(userDTO);
-        return "redirect:/";
-    }
+
 
 }

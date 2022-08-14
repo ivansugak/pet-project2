@@ -52,7 +52,7 @@ public class VacancyService {
         return vacancy;
     }
 
-    public void deleteVacancies (Long id){
+    public void deleteVacancies (Long id){//castomException trows
         Vacancy vacancy = vacancyRepository.findById(id).orElseThrow();
         vacancyRepository.delete(vacancy);
     }

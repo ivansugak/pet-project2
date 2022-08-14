@@ -27,7 +27,7 @@
 //    @DisplayName("Testing search user which exists in database")
 //    @Tag("Repository-TEST")
 //    void findUserByLogin() {
-//        Optional<User> actualUser = userRepository.findByLogin("Anna");
+//        Optional<User> actualUser = userRepository.getByLogin("Anna");
 //        Assertions.assertEquals(expectedUser,actualUser);
 //    }
 //}
