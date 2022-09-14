@@ -32,12 +32,12 @@ public class VacancyService {
         return vacancyRepository.existsById(id);
     }
 
-    public VacancyDTO findVacancyById(Long id){
-        if(vacancyRepository.findById(id).isPresent()){
-            return VacancyMapper.mapToDTO(vacancyRepository.findById(id).get());
-        }
-        return null;
-    }
+//    public Vacancy findVacancyById(Long id){
+//        if(vacancyRepository.findById(id).isPresent()){
+//            return vacancyRepository.findById(id).get();
+//        }
+//        return null;
+//    }
 
     public ArrayList<Vacancy> addListVacanvyForshowVacanciesDetail(Long id){
         Optional<Vacancy> vacancy = vacancyRepository.findById(id);
@@ -52,12 +52,27 @@ public class VacancyService {
         return vacancy;
     }
 
-    public void deleteVacancies (Long id){//castomException trows
+    public void deleteVacancies (Long id){
         Vacancy vacancy = vacancyRepository.findById(id).orElseThrow();
         vacancyRepository.delete(vacancy);
     }
 
     public void saveVacancy (Vacancy vacancy){
         vacancyRepository.save(vacancy);
+    }
+
+    public boolean findVacancyByVocation(String vocation){
+        if (vacancyRepository.getVacancyByVocationVacancy(vocation).isPresent()) {
+            return true;
+        }
+        return false;
+    }
+
+    public Long getIDByVocation(String vocation){
+        Long id = null;
+        if (vacancyRepository.getVacancyByVocationVacancy(vocation).isPresent()) {
+            id = vacancyRepository.getVacancyByVocationVacancy(vocation).get().getId();
+        }
+        return id;
     }
 }

@@ -37,7 +37,7 @@ public class RegistrationController {
             return "/vacancies";
         }
         else {
-            return "/errorcreateuser";
+            return "errorAuth";
         }
     }
 }

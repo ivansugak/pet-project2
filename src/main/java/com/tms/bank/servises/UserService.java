@@ -82,7 +82,14 @@ public class UserService {
     }
 
     public List<User> getUsers() {
-        List<User> users = userRepository.findAll();
-        return users;
+        return userRepository.findAll();
+    }
+
+    public Long getIDByLogin(String login){
+        Long id = null;
+        if (userRepository.getByLogin(login).isPresent()) {
+            id = userRepository.getByLogin(login).get().getId();
+        }
+        return id;
     }
 }

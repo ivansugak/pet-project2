@@ -1,7 +1,5 @@
 package com.tms.bank.controllers;
 
-import com.tms.bank.dto.UserDTO;
-import com.tms.bank.exception.UserException;
 import com.tms.bank.mapper.UserMapper;
 import com.tms.bank.models.User;
 import com.tms.bank.servises.UserService;
@@ -9,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -36,16 +33,5 @@ public class UsersController {
         userService.delete(id);
         return "redirect:/";
     }
-
-//    @GetMapping("/logout")
-//    public String logout(HttpServletRequest request) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (authentication != null) {
-//            request.getSession().invalidate();
-//        }
-//        return "redirect:/";
-//    }
-
-
 
 }

@@ -41,6 +41,12 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Vacancy> vacancies;
 
+//    public User(String anna, String annov, int i, String s, Role user, String anna1, String s1) {
+//    }
+
+//    public User() {
+//    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

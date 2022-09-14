@@ -44,12 +44,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/auth")
+                .defaultSuccessUrl("/vacancies.html",true)
+                .failureUrl("/errorAuth.html?error=true")
                 .permitAll()
                 .and()
                 .logout()
-                .logoutUrl("/logout")
+                .logoutUrl("/perform_logout")
                 .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/auth.html")
                 .invalidateHttpSession(true)
                 .permitAll();
 
