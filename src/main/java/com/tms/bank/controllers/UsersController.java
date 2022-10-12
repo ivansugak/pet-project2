@@ -30,7 +30,7 @@ public class UsersController {
 
     @PostMapping("/user/{id}/remove")
     public String deleteUser(@PathVariable(value = "id") long id){
-        userService.delete(id);
+        userService.deleteUser(id);
         return "redirect:/";
     }
 

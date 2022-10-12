@@ -36,6 +36,10 @@
     <div class="main">
         <div class="field"><label> Login : </label>
             <input type="text" name="username"/>
+<!--            <input type="text" th:field="*{username}"/>-->
+<!--            <span class="validationError"-->
+<!--            th:if="${#fields.hasErrors('username')}"-->
+<!--            th:errors="*{username}">Login Error</span>-->
         </div>
         <div class="field"><label> Password: </label>
             <input type="password" name="password"/>

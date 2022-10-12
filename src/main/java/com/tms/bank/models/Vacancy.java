@@ -8,6 +8,8 @@ import java.util.Objects;
 
 @Getter
 @Setter
+@EqualsAndHashCode
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -31,27 +33,5 @@ public class Vacancy implements Serializable {
     public Vacancy(String vocationVacancy, String description) {
         this.vocationVacancy = vocationVacancy;
         this.description = description;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Vacancy)) return false;
-        Vacancy vacancy = (Vacancy) o;
-        return id == vacancy.id && Objects.equals(vocationVacancy, vacancy.vocationVacancy) && Objects.equals(description, vacancy.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, vocationVacancy, description);
-    }
-
-    @Override
-    public String toString() {
-        return "Vacancy{" +
-                "id=" + id +
-                ", vocationVacancy='" + vocationVacancy + '\'' +
-                ", description='" + description + '\'' +
-                '}';
     }
 }

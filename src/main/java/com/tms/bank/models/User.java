@@ -4,12 +4,16 @@ import com.tms.bank.enums.Role;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Getter
 @Setter
+@EqualsAndHashCode
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -22,55 +26,49 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotNull
     @Column(name = "first_name")
     private String firstName;
+
+    @NotNull
     @Column(name = "last_name")
     private String lastName;
+
+    @NotNull
     @Column(name = "age")
     private int age;
+
     @Column(name = "vocation")
     private String vocation;
+
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;
+
+    @NotNull
+    @Size(min = 4, message = "Login must be at least 4 characters long")
     @Column(name = "login")
     private String login;
+
+    @NotNull
+    @Size(min = 4, message = "Password must be at least 4 characters and numbers long")
     @Column(name = "password")
     private String password;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Vacancy> vacancies;
 
-//    public User(String anna, String annov, int i, String s, Role user, String anna1, String s1) {
-//    }
 
-//    public User() {
-//    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return age == user.age && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(vocation, user.vocation) && role == user.role && login.equals(user.login) && password.equals(user.password);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName, lastName, age, vocation, role, login, password);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", age=" + age +
-                ", vocation='" + vocation + '\'' +
-                ", role=" + role +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public User(long id, String firstName, String lastName, int age, String vocation, Role role, String login, String password) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.vocation = vocation;
+        this.role = role;
+        this.login = login;
+        this.password = password;
     }
 }

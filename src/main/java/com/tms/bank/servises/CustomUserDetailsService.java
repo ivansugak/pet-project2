@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
@@ -18,15 +20,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) {
 
-        User user = null;
-        try {
-            user = userRepository.getByLogin(username)
-                    .orElseThrow(()->new UserException("User was not found!"));
-        } catch (UserException e) {
-            e.printStackTrace();
-        }
+        User user = userRepository.getByLogin(username)
+                .orElseThrow(() -> new UserException("User was not found!"));
+//        Optional<User> user = Optional.ofNullable(userRepository.getByLogin(username)
+//                .orElseThrow(() -> new UserException("User was not found!"))); //перед ретурном просто проверь опшонал, что имел ввиду?
 
         return UserDetailsMapper.mapToCustomUser(user);
-
     }
 }

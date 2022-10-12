@@ -32,13 +32,6 @@ public class VacancyService {
         return vacancyRepository.existsById(id);
     }
 
-//    public Vacancy findVacancyById(Long id){
-//        if(vacancyRepository.findById(id).isPresent()){
-//            return vacancyRepository.findById(id).get();
-//        }
-//        return null;
-//    }
-
     public ArrayList<Vacancy> addListVacanvyForshowVacanciesDetail(Long id){
         Optional<Vacancy> vacancy = vacancyRepository.findById(id);
         ArrayList<Vacancy> vacancies = new ArrayList<>();
@@ -62,17 +55,18 @@ public class VacancyService {
     }
 
     public boolean findVacancyByVocation(String vocation){
-        if (vacancyRepository.getVacancyByVocationVacancy(vocation).isPresent()) {
-            return true;
-        }
-        return false;
+        return vacancyRepository.getVacancyByVocationVacancy(vocation).isPresent();
     }
 
-    public Long getIDByVocation(String vocation){
-        Long id = null;
-        if (vacancyRepository.getVacancyByVocationVacancy(vocation).isPresent()) {
-            id = vacancyRepository.getVacancyByVocationVacancy(vocation).get().getId();
-        }
-        return id;
+//    public Long getIDByVocation(String vocation){ //рабочий код
+//        Long id = null;
+//        if (vacancyRepository.getVacancyByVocationVacancy(vocation).isPresent()) {
+//            id = vacancyRepository.getVacancyByVocationVacancy(vocation).get().getId();
+//        }
+//        return id;
+//    }
+
+        public Long getIDByVocation(String vocation){
+        return vacancyRepository.getVacancyByVocationVacancy(vocation).isPresent() ? vacancyRepository.getVacancyByVocationVacancy(vocation).get().getId() : null;
     }
 }

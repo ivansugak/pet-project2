@@ -22,7 +22,6 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
         if (auth != null) {
 
             response.sendRedirect(request.getContextPath() + "/accessDenied");
-
         }
     }
 }

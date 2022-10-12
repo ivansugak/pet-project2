@@ -4,9 +4,12 @@ import com.tms.bank.dto.UserDTO;
 import com.tms.bank.servises.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/registration")
@@ -16,12 +19,17 @@ public class RegistrationController {
     private final UserService userService;
 
     @PostMapping()
-    public String create(@RequestParam("username") String username,
-                         @RequestParam("password") String password,
-                         @RequestParam("firstname") String firstname,
-                         @RequestParam("lastname") String lastname,
-                         @RequestParam("age") int age,
-                         @RequestParam("vocation") String vocation) {
+    public String create(@Valid @RequestParam("username") String username,
+                         @Valid @RequestParam("password") String password,
+                         @Valid @RequestParam("firstname") String firstname,
+                         @Valid @RequestParam("lastname") String lastname,
+                         @Valid @RequestParam("age") int age,
+                         @RequestParam("vocation") String vocation,
+                         Errors errors) {
+
+        if (errors.hasErrors()){
+            return "registration";
+        }
 
         UserDTO userDTO = UserDTO.builder()
                 .login(username)

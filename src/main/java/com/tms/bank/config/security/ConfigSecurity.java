@@ -1,4 +1,4 @@
-package com.tms.bank.security.config;
+package com.tms.bank.config.security;
 
 import com.tms.bank.enums.Permission;
 import com.tms.bank.exception.CustomAccessDeniedHandler;
@@ -23,7 +23,7 @@ import java.security.SecureRandom;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class ConfigSecurity extends WebSecurityConfigurerAdapter {
 
     private final CustomUserDetailsService userDetailsService;
 
@@ -44,14 +44,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/auth")
-                .defaultSuccessUrl("/vacancies.html",true)
+                .defaultSuccessUrl("/vacancies.html")
                 .failureUrl("/errorAuth.html?error=true")
                 .permitAll()
                 .and()
                 .logout()
-                .logoutUrl("/perform_logout")
+//                .logoutUrl("/")
                 .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/auth.html")
+                .logoutSuccessUrl("/home.html")
                 .invalidateHttpSession(true)
                 .permitAll();
 
