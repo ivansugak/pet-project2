@@ -5,13 +5,11 @@ import com.tms.bank.servises.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Controller
+@RestController
 @RequestMapping("/registration")
 @AllArgsConstructor
 public class RegistrationController {
@@ -19,28 +17,18 @@ public class RegistrationController {
     private final UserService userService;
 
     @PostMapping()
-    public String create(@Valid @RequestParam("username") String username,
-                         @Valid @RequestParam("password") String password,
-                         @Valid @RequestParam("firstname") String firstname,
-                         @Valid @RequestParam("lastname") String lastname,
-                         @Valid @RequestParam("age") int age,
-                         @RequestParam("vocation") String vocation,
-                         Errors errors) {
+    public String create(@RequestBody UserDTO userDTO) {
 
-        if (errors.hasErrors()){
-            return "registration";
-        }
+//        UserDTO userDTO = UserDTO.builder()
+//                .login(username)
+//                .password(password)
+//                .firstName(firstname)
+//                .lastName(lastname)
+//                .age(age)
+//                .vocation(vocation)
+//                .build();
 
-        UserDTO userDTO = UserDTO.builder()
-                .login(username)
-                .password(password)
-                .firstName(firstname)
-                .lastName(lastname)
-                .age(age)
-                .vocation(vocation)
-                .build();
-
-        if (userService.getUserByLogin(username)) {
+        if (userService.getUserByLogin(userDTO.getLogin())) {
             userService.createUser(userDTO);
             return "/vacancies";
         }

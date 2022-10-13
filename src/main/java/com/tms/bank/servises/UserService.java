@@ -65,7 +65,7 @@ public class UserService {
 //        }
 //    }
 
-    public UserDTO updateUser(Long id, UserDTO userDTO) {
+    public UserDTO updateUser(Long id, UserDTO userDTO) {  //билдер
         Optional<User> user = userRepository.findById(id);
         UserDTO newUserDTO;
 
@@ -111,7 +111,12 @@ public class UserService {
 //        return id;
 //    }
 
-        public Long getIdByLogin(String login){
-        return userRepository.getByLogin(login).isPresent() ? userRepository.getByLogin(login).get().getId() : null;
+    public Long getIdByLogin(String login) {
+
+        User user = userRepository.getByLogin(login).orElseThrow(RuntimeException::new);
+
+        return user.getId();
+
+//        return userRepository.getByLogin(login).isPresent() ? userRepository.getByLogin(login).get().getId() : null;
     }
 }

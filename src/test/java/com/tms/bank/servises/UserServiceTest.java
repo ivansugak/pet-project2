@@ -87,89 +87,89 @@ class UserServiceTest {
         }
     }
 
-    @InjectMocks
-    private UserService userServiceTest;
-
-    @Mock
-    private UserRepository userRepositoryTest;
-
-
-    @Test
-    @DisplayName("Testing search user which exists in database")
-    public void getUserByIdTest() {
-        when(userRepositoryTest.getByLogin("Jorik")).thenReturn(Optional.of(new User(35, "Jorik", "Jorikov", 27, "PHP Developer", Role.USER, "Jorik85", "Jorik1985")));
-
-        boolean emp = userServiceTest.getUserByLogin("Jorik");
-
-        Assertions.assertTrue(emp);
-    }
-
-    @Test
-    @DisplayName("Testing saving user in database")
-    public void createUserTest() {
-
-        userServiceTest.createUser(new UserDTO());
-
-        verify(userRepositoryTest, times(1)).save(any(User.class));
-        verifyNoMoreInteractions(userRepositoryTest);
-    }
-
-    @Test
-    @DisplayName("Testing update user in database")
-    public void updateUserTest() {
-
-        userServiceTest.updateUser(anyLong(), new UserDTO());
-
-        verify(userRepositoryTest, times(1)).save(any(User.class));
-        verifyNoMoreInteractions(userRepositoryTest);
-    }
-
-    @Test
-    @DisplayName("Testing delete user from database")
-    public void deleteUserTest() {
-
-        userServiceTest.deleteUser(anyLong());
-        verify(userRepositoryTest, times(1)).deleteById(anyLong());
-        verifyNoMoreInteractions(userRepositoryTest);
-    }
-
-    @Test
-    @DisplayName("Testing search user which exists in database")
-    public void existsUserByIdTest() {
-
-        boolean check = userServiceTest.existsById(anyLong());
-
-        Assertions.assertTrue(check);
-        verify(userRepositoryTest, times(1)).existsById(anyLong());
-        verifyNoMoreInteractions(userRepositoryTest);
-    }
-
-    @Test
-    @DisplayName("Testing search user by login")
-    public void getUserByLoginTest() {
-
-        boolean check = userServiceTest.getUserByLogin(anyString());
-
-        Assertions.assertTrue(check);
-        verify(userRepositoryTest, times(1)).getByLogin(anyString());
-        verifyNoMoreInteractions(userRepositoryTest);
-    }
-
-    @Test
-    @DisplayName("Testing get all users")
-    public void getUsersTest() {
-        User user1 = new User(35L, "Jorik", "Jorikov", 27, "PHP Developer", Role.USER, "Jorik85", "Jorik1985");
-        User user2 = new User(36L, "Forik", "Forikov", 27, "PHP Developer", Role.USER, "Forik85", "Forik1985");
-
-        List<User> list = new ArrayList<>();
-        list.add(user1);
-        list.add(user2);
-
-        when(userRepositoryTest.findAll()).thenReturn(list);
-
-        List<User> empList = userServiceTest.getUsers();
-
-        assertEquals(2, empList.size());
-        verify(userRepositoryTest, times(1)).findAll();
-    }
+//    @InjectMocks
+//    private UserService userServiceTest;
+//
+//    @Mock
+//    private UserRepository userRepositoryTest;
+//
+//
+//    @Test
+//    @DisplayName("Testing with MOCKITO search user which exists in database")
+//    public void getUserByIdTest() {
+//        when(userRepositoryTest.getByLogin("Jorik")).thenReturn(Optional.of(new User(35, "Jorik", "Jorikov", 27, "PHP Developer", Role.USER, "Jorik85", "Jorik1985")));
+//
+//        boolean emp = userServiceTest.getUserByLogin("Jorik");
+//
+//        Assertions.assertTrue(emp);
+//    }
+//
+//    @Test
+//    @DisplayName("Testing with MOCKITO saving user in database")
+//    public void createUserTest() {
+//
+//        userServiceTest.createUser(new UserDTO());
+//
+//        verify(userRepositoryTest, times(1)).save(any(User.class));
+//        verifyNoMoreInteractions(userRepositoryTest);
+//    }
+//
+//    @Test
+//    @DisplayName("Testing with MOCKITO update user in database")
+//    public void updateUserTest() {
+//
+//        userServiceTest.updateUser(anyLong(), new UserDTO());
+//
+//        verify(userRepositoryTest, times(1)).save(any(User.class));
+//        verifyNoMoreInteractions(userRepositoryTest);
+//    }
+//
+//    @Test
+//    @DisplayName("Testing with MOCKITO delete user from database")
+//    public void deleteUserTest() {
+//
+//        userServiceTest.deleteUser(anyLong());
+//        verify(userRepositoryTest, times(1)).deleteById(anyLong());
+//        verifyNoMoreInteractions(userRepositoryTest);
+//    }
+//
+//    @Test
+//    @DisplayName("Testing with MOCKITO search user which exists in database")
+//    public void existsUserByIdTest() {
+//
+//        boolean check = userServiceTest.existsById(anyLong());
+//
+//        Assertions.assertTrue(check);
+//        verify(userRepositoryTest, times(1)).existsById(anyLong());
+//        verifyNoMoreInteractions(userRepositoryTest);
+//    }
+//
+//    @Test
+//    @DisplayName("Testing search user by login with MOCKITO")
+//    public void getUserByLoginTest() {
+//
+//        boolean check = userServiceTest.getUserByLogin(anyString());
+//
+//        Assertions.assertTrue(check);
+//        verify(userRepositoryTest, times(1)).getByLogin(anyString());
+//        verifyNoMoreInteractions(userRepositoryTest);
+//    }
+//
+//    @Test
+//    @DisplayName("Testing get all users with MOCKITO")
+//    public void getUsersTest() {
+//        User user1 = new User(35L, "Jorik", "Jorikov", 27, "PHP Developer", Role.USER, "Jorik85", "Jorik1985");
+//        User user2 = new User(36L, "Forik", "Forikov", 27, "PHP Developer", Role.USER, "Forik85", "Forik1985");
+//
+//        List<User> list = new ArrayList<>();
+//        list.add(user1);
+//        list.add(user2);
+//
+//        when(userRepositoryTest.findAll()).thenReturn(list);
+//
+//        List<User> empList = userServiceTest.getUsers();
+//
+//        assertEquals(2, empList.size());
+//        verify(userRepositoryTest, times(1)).findAll();
+//    }
 }
