@@ -16,7 +16,6 @@ public class RabbitVacancyMessagingService implements VacancyMessagingService{
         this.rabbit = rabbit;
     }
 
-    @Override
     public void sendVacancy(Vacancy vacancy) {
         rabbit.convertAndSend("bank.vacancy", vacancy);
 

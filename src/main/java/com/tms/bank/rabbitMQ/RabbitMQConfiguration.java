@@ -29,7 +29,7 @@ public class RabbitMQConfiguration {
     }
 
     public Queue myQueue(){
-        return new Queue("muQueue");
+        return new Queue("myQueue");
     }
 
 }
