@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/bankofvacancies
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.jdbc.Driver
+
+  thymeleaf:
+    cache: true
+
+#logging:
+#  level: debug

@@ -6,6 +6,7 @@ import com.tms.bank.mapper.VacancyMapper;
 import com.tms.bank.models.Vacancy;
 import com.tms.bank.repositories.VacancyRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,9 +19,12 @@ public class VacancyService {
 
     private final VacancyRepository vacancyRepository;
 
-    public List<Vacancy> findByAllVacancy(){
+    public List<Vacancy> findByAllVacancy(Pageable pageable){
         return vacancyRepository.findAll();
     }
+//    public List<Vacancy> findByAllVacancy(){
+//        return vacancyRepository.findAll();
+//    }
 
     public VacancyDTO createVacancy (VacancyDTO vacancyDTO){
         VacancyDTO newVacancyDTO = VacancyMapper.mapToDTO(vacancyRepository.save(VacancyMapper.mapToEntity(vacancyDTO)));

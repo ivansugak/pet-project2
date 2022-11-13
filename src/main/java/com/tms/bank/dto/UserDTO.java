@@ -3,6 +3,7 @@ package com.tms.bank.dto;
 import com.tms.bank.enums.Role;
 import lombok.*;
 
+@Data
 @Getter
 @Setter
 @NoArgsConstructor

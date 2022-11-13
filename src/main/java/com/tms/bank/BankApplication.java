@@ -23,14 +23,22 @@ public class BankApplication {
             repo1.deleteAll(repo1.findAll());
             repo.deleteAll(repo.findAll());
 
-            repo.save(new User(23L, "ADMIN", "ADMINOV", 25, "Google", Role.ADMIN, "ADMIN_GENERAL", "$2a$10$ngKBn8lAHupZJD3qapOoeuoqkrRKRyag5eTp4FX4rUUdrdKHIU0vG"));
-            repo.save(new User(24L, "Anna", "Annov", 25, "Google", Role.USER, "Anna55", "$2a$10$B7zsImYWJbYe1C7Tu3TdQOHONUWbqpMOGgApZ6fvrjCek3euLPHEG"));
+            repo.save(new User(23L, "ADMIN", "ADMINOV", 25, "Google", Role.ADMIN, "ADMIN_GENERAL", "$2a$10$alJjaoZz2I1Tkr7/.hlete6fWYGcvNIWb8uihY9l5Uh13idR7qzIS"));
+            repo.save(new User(24L, "Anna", "Annov", 25, "Google", Role.USER, "Anna55", "$2a$10$iSLvEUyDUE/JHqGI16eK7eHiepQRg7BwMNlddoF2QjKgSfM6umZiW"));
 
 
             //noinspection OptionalGetWithoutIsPresent
-            repo1.save(new Vacancy(1, "Google", "Google", repo.getByLogin("Anna55").get()));
+            repo1.save(new Vacancy(1, "Google", "Google", repo.getByLogin("ADMIN_GENERAL").get()));
             //noinspection OptionalGetWithoutIsPresent
-            repo1.save(new Vacancy(11, "Google", "Google", repo.getByLogin("Anna55").get()));
+            repo1.save(new Vacancy(11, "Google", "Google", repo.getByLogin("ADMIN_GENERAL").get()));
+            //noinspection OptionalGetWithoutIsPresent
+            repo1.save(new Vacancy(12, "Java Developer (Junior)", "Solution", repo.getByLogin("ADMIN_GENERAL").get()));
+            //noinspection OptionalGetWithoutIsPresent
+            repo1.save(new Vacancy(13, "PHP Developer (Middle)", "IBA", repo.getByLogin("ADMIN_GENERAL").get()));
+            //noinspection OptionalGetWithoutIsPresent
+            repo1.save(new Vacancy(14, "Android Developer (Senior)", "Vizor", repo.getByLogin("ADMIN_GENERAL").get()));
+            //noinspection OptionalGetWithoutIsPresent
+            repo1.save(new Vacancy(15, "Kotlin Developer (Intern)", "IZO", repo.getByLogin("ADMIN_GENERAL").get()));
         };
     }
 }
