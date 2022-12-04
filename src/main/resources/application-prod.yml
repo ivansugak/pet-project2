@@ -8,5 +8,5 @@ spring:
   thymeleaf:
     cache: true
 
-#logging:
-#  level: debug
+logging:
+  level: debug

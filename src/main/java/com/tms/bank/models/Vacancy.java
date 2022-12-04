@@ -1,5 +1,6 @@
 package com.tms.bank.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,13 +22,20 @@ public class Vacancy implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty
     private long id;
+
     @Column(name = "vocation")
+    @JsonProperty
     private String vocationVacancy;
+
     @Column(name = "description")
+    @JsonProperty
     private String description;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonProperty
     private User user;
 
     public Vacancy(String vocationVacancy, String description) {

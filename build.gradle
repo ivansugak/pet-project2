@@ -38,6 +38,7 @@ dependencies {
     testImplementation 'net.bytebuddy:byte-buddy:1.12.9'
     implementation 'org.springframework.boot:spring-boot-starter-amqp:2.7.3'
     implementation 'org.springframework.boot:spring-boot-starter:2.7.3'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure:2.6.7'
 
 }
 

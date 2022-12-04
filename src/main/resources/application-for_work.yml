@@ -5,8 +5,28 @@ spring:
     password: 1234
     driver-class-name: com.mysql.jdbc.Driver
 
+  devtools:
+    add-properties: false
+
+  main:
+    allow-bean-definition-overriding: true
+
   thymeleaf:
     cache: true
-#
-#logging:
-#  level: warn
+
+  rabbitmq:
+    host: localhost
+    virtualhost: /
+    port: 15672
+    username: guest
+    password: guest
+    exchange: rabbitmq.exchange
+    queue: rabbitmq.queue
+    routingkey: rabbitmq.routingkey
+    reply.timeout: 60000
+    concurrent.consumers: 1
+    max.concurrent.consumers: 1
+
+logging:
+  level:
+    guest: warn

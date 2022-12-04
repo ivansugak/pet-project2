@@ -1,0 +1,33 @@
+{
+  "properties": [
+    {
+      "name": "spring.rabbitmq.queue",
+      "type": "java.lang.String",
+      "description": "Description for spring.rabbitmq.queue."
+    },
+    {
+      "name": "spring.rabbitmq.exchange",
+      "type": "java.lang.String",
+      "description": "Description for spring.rabbitmq.exchange."
+    },
+    {
+      "name": "spring.rabbitmq.routingkey",
+      "type": "java.lang.String",
+      "description": "Description for spring.rabbitmq.routingkey."
+    },
+    {
+      "name": "spring.rabbitmq.reply.timeout",
+      "type": "java.lang.String",
+      "description": "Description for spring.rabbitmq.reply.timeout."
+    },
+    {
+      "name": "spring.rabbitmq.concurrent.consumers",
+      "type": "java.lang.String",
+      "description": "Description for spring.rabbitmq.concurrent.consumers."
+    },
+    {
+      "name": "spring.rabbitmq.max.concurrent.consumers",
+      "type": "java.lang.String",
+      "description": "Description for spring.rabbitmq.max.concurrent.consumers."
+    }
+  ] }

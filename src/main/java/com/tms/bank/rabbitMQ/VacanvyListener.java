@@ -1,24 +1,20 @@
 package com.tms.bank.rabbitMQ;
 
+
 import com.tms.bank.models.Vacancy;
-import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
-@EnableRabbit
+@RabbitListener(queues = "rabbitmq.queue", id = "listener")
 @Component
 public class VacanvyListener {
 
-    private RabbitTemplate rabbit;
-
-    public Vacancy receiveVacancy(){
-        return  (Vacancy) rabbit.receiveAndConvert("myQueue");
+    private static final Logger logger = LogManager.getLogger(VacanvyListener.class.toString());
+    @RabbitHandler
+    public void receiver(Vacancy vacancy) {
+        logger.info("MenuOrder listener invoked - Consuming Message with MenuOrder Identifier : " + vacancy.getDescription());
     }
-
-//    @RabbitListener(queues = "myQueue")
-//    public void processMyQueue(String message){
-//        System.out.println("Receive from myQueue" + message);
-//    }
-
 }
